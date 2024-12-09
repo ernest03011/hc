@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Cozy Countryside Retreat</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -34,9 +34,9 @@
         <div class="carousel">
             <button class="carousel-button prev">&#8249;</button>
             <div class="carousel-container">
-                <div class="carousel-slide"><img src="./public/images/carousel.jpg" alt="View 1"></div>
-                <div class="carousel-slide"><img src="./public/images/carousel.jpg" alt="View 2"></div>
-                <div class="carousel-slide"><img src="./public/images/carousel.jpg" alt="View 3"></div>
+                <div class="carousel-slide"><img src="./images/carousel.jpg" alt="View 1"></div>
+                <div class="carousel-slide"><img src="./images/carousel.jpg" alt="View 2"></div>
+                <div class="carousel-slide"><img src="./images/carousel.jpg" alt="View 3"></div>
             </div>
             <button class="carousel-button next">&#8250;</button>
         </div>
@@ -47,17 +47,17 @@
         <h2>What You Can Enjoy</h2>
         <div class="activity-grid">
             <div class="activity-card">
-                <img src="./public/images/activity.jpg" alt="Activity 1">
+                <img src="./images/activity.jpg" alt="Activity 1">
                 <h3>Nature Trails</h3>
                 <p>Hike through our scenic trails and discover hidden ponds, wildflower fields, and gentle streams.</p>
             </div>
             <div class="activity-card">
-                <img src="./public/images/activity.jpg" alt="Activity 2">
+                <img src="./images/activity.jpg" alt="Activity 2">
                 <h3>Farm-to-Table Meals</h3>
                 <p>Relish fresh produce straight from our gardens. Enjoy healthy, farm-to-table dining experiences.</p>
             </div>
             <div class="activity-card">
-                <img src="./public/images/activity.jpg" alt="Activity 3">
+                <img src="./images/activity.jpg" alt="Activity 3">
                 <h3>Outdoor Yoga</h3>
                 <p>Relax and unwind with guided yoga sessions in the open air, surrounded by calm and silence.</p>
             </div>
