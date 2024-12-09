@@ -1,0 +1,17 @@
+{
+    "name": "manue/hc",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Manuel De Jesus"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
