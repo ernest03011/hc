@@ -29,6 +29,9 @@ class Env{
       'social' => [
         'ig' => $env['SOCIAL_IG_URL'],
         'airbnb' => $env['SOCIAL_AIRBNB_URL']
+      ], 
+      'view' => [
+        'path' => $env['VIEW_PATH']
       ]
     ];
   }
