@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-use App\Interfaces\DatabaseInterface;
+use EnvViewConfig;
+use App\Exceptions\RouteNotFoundException;
 
 class App{
 
-  private static DatabaseInterface $db;
 
   public function __construct(
 
@@ -19,15 +19,25 @@ class App{
   
   ) {
 
-  }
+    View::setViewPath(
+      $config->view['path'] ?? __DIR__ . '/../views'
+    );
 
-  public static function db() : DatabaseInterface
-  {
-    return static::$db;
   }
 
   public function run()
   {
+
+    try {
+
+      echo $this->router->resolve($this->request['uri'], strtolower($this->request['method']));
+
+    } catch (RouteNotFoundException) {
+
+      http_response_code(404);
+
+      echo View::make('error/404');
+    }
 
   }
 
