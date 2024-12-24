@@ -6,6 +6,6 @@ namespace App\Interfaces;
 
 interface EmailInterface{
 
-  public function send() : bool;
+  public function send(array $data) : bool;
 
 }
