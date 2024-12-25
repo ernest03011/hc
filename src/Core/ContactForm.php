@@ -7,18 +7,20 @@ namespace App\Core;
 use App\Exceptions\EmailException;
 use App\Interfaces\EmailInterface;
 use PHPMailer\PHPMailer\PHPMailer;
+use App\Factories\PHPMailerFactory;
 
 class ContactForm implements EmailInterface{
 
+  private PHPMailer $mailer;
+
   public function __construct(
-    private PHPMailer $mailer, 
-    private Env $config, 
-    private array $data
+    private PHPMailerFactory $mailerFactory,
+    private Env $config
   ) {
-    
+    $this->mailer = $this->mailerFactory->createPHPMailer();
   }
 
-  public function send() : bool
+  public function send(array $data) : bool
   {
     $smtp = $this->config->smtp;
     try {
@@ -33,21 +35,20 @@ class ContactForm implements EmailInterface{
       $this->mailer->Password = $smtp['password'];
       $this->mailer
               ->setFrom(
-                "{$smtp['setFrom']}", 
+                $smtp['setFrom'], 
                 $smtp['name'] ?? ""
-              );
+              );     
       $this->mailer
               ->addReplyTo(
-                "{$this->data["email"]}" ?? "", 
+                $data["email"] ?? "", 
                 $this->data['name'] ?? ""
               );
       $this->mailer
-              ->addAddress(
-                "{$smtp['SMTP_RECEIVER_ADDRESS']}", 
+              ->addAddress($smtp['ReceiverAddress'], 
                 $this->data['name'] ?? ""
               );
       $this->mailer->Subject = 'Countless moments in Paradise.';
-      $this->mailer->Body = $this->data['message'];
+      $this->mailer->Body = $data['message'];
 
       $this->mailer->send();
 
