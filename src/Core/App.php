@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Core\ContactForm;
+use App\Interfaces\EmailInterface;
 use App\Exceptions\RouteNotFoundException;
 
 class App{
@@ -13,10 +15,12 @@ class App{
 
     protected Container $container,
     protected Router $router,
-    protected array $request,
+    protected Request $request,
     protected Env $config
   
   ) {
+
+    $this->container->set(EmailInterface::class, ContactForm::class);
 
     View::setViewPath(
       $config->view['path'] ?? __DIR__ . '/../views'
@@ -29,7 +33,9 @@ class App{
 
     try {
 
-      echo $this->router->resolve($this->request['uri'], strtolower($this->request['method']));
+      echo $this->router->resolve(
+        $this->request
+      ); 
 
     } catch (RouteNotFoundException) {
 
