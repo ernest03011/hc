@@ -37,8 +37,12 @@ class Router
     return $this->routes;
   }
 
-  public function resolve(string $requestUri, string $requestMethod)
+  public function resolve(Request $request)
   {
+
+    $requestUri = $request->server('REQUEST_URI');
+    $requestMethod = strtolower($request->server('REQUEST_METHOD'));
+
 
     $route = explode('?', $requestUri)[0];
     $action = $this->routes[$requestMethod][$route] ?? null;
@@ -56,7 +60,7 @@ class Router
       $class = $this->container->get($class);
       if(method_exists($class, $method))
       {
-        return call_user_func_array([$class, $method], []);
+        return call_user_func_array([$class, $method], [$request]);
       }
     }
 
