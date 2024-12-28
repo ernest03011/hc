@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Core\Validation\Validator;
 use App\Core\ContactForm;
 use App\Interfaces\EmailInterface;
+use App\Interfaces\ValidatorInterface;
 use App\Exceptions\RouteNotFoundException;
 
 class App{
@@ -21,6 +23,7 @@ class App{
   ) {
 
     $this->container->set(EmailInterface::class, ContactForm::class);
+    $this->container->set(ValidatorInterface::class, Validator::class);
 
     View::setViewPath(
       $config->view['path'] ?? __DIR__ . '/../views'
