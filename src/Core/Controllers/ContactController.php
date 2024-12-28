@@ -6,14 +6,16 @@ namespace App\Core\Controllers;
 
 use App\Core\View;
 use App\Core\Request;
+use App\Core\Validation\validationType;
 use App\Core\Validator;
 use App\Interfaces\EmailInterface;
+use App\Interfaces\ValidatorInterface;
 
 class ContactController{
 
   public function __construct(
     private EmailInterface $mail,
-    protected Validator $validator
+    protected ValidatorInterface $validator
   ) {
   }
 
@@ -34,12 +36,12 @@ class ContactController{
       'message' => $request->post('message')
     ];
 
-    // $errors = $this->validator->getValidationErrors($data);
+    $isValid = $this->validate($data);
 
-    // if (! empty($errors))
-    // {
-    //   return View::make('error/422');
-    // }
+    if (! $isValid)
+    {
+      return View::make('error/422');
+    }
 
     $status = $this->mail->send($data);
 
@@ -56,4 +58,29 @@ class ContactController{
     );
   }
 
+  private function validate($data) : bool
+  {
+    $isValid = false;
+
+    $value1 = $data['name'];
+    $isNameFieldEmpty = $this->validator->validate($value1, validationType::REQUIRED);
+
+    $value2 = $data['email'];
+    $isEmailFieldEmpty = $this->validator->validate($value2, validationType::REQUIRED);
+    $isValidEmail = $this->validator->validate($value2, validationType::EMAIL);
+
+    $value3 = $data['message'];
+    $isBodyFieldEmpty = $this->validator->validate($value3, validationType::REQUIRED);
+
+  
+    if($isNameFieldEmpty && $isEmailFieldEmpty && $isValidEmail && $isBodyFieldEmpty)
+    { 
+      $isValid = true;
+    } else
+    {
+      $isValid = false;
+    }   
+  
+    return $isValid;
+  }
 }
