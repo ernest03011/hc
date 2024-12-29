@@ -4,25 +4,33 @@ declare(strict_types=1);
 
 namespace App\Core\Controllers;
 
+use App\Core\Env;
 use App\Core\View;
 use App\Core\Request;
-use App\Core\Validation\validationType;
-use App\Core\Validator;
 use App\Interfaces\EmailInterface;
 use App\Interfaces\ValidatorInterface;
+use App\Core\Validation\validationType;
 
 class ContactController{
 
   public function __construct(
     private EmailInterface $mail,
-    protected ValidatorInterface $validator
+    protected ValidatorInterface $validator,
+    private Env $config
   ) {
   }
 
   public function index() : View
 
   {
-    return View::make('contact.view');
+
+    return View::make(
+      'contact.view', 
+      [
+        'ig' => $this->config->social['ig'],
+        'airbnb' => $this->config->social['airbnb']
+      ]
+    );
   }
 
   public function sendEmail(Request $request) : View
