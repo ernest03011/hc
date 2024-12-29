@@ -19,8 +19,8 @@
     <p>Questions, inquiries, or reservations? We’re here to help.</p>
     <div class="contact-details">
         <div class="social-links">
-            <a href="https://www.instagram.com/yourinsta" target="_blank">Instagram</a>
-            <a href="https://www.airbnb.com/rooms/yourlisting" target="_blank">Airbnb Listing</a>
+            <a href="<?php echo $ig ?>" target="_blank">Instagram</a>
+            <a href="<?php echo $airbnb ?>" target="_blank">Airbnb Listing</a>
         </div>
     </div>
     <div class="contact-form-wrapper">
