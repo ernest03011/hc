@@ -6,7 +6,7 @@
     <div class="hero-content">
         <h1>Escape to the Green</h1>
         <p>Discover our cozy retreat nestled in the heart of the countryside. Enjoy fresh air, open fields, and a peaceful getaway from the city hustle.</p>
-        <a href="#contact">Book Your Stay</a>
+        <a href="/contact">Book Your Stay</a>
     </div>
 </section>
 
@@ -15,9 +15,9 @@
     <div class="carousel">
         <button class="carousel-button prev">&#8249;</button>
         <div class="carousel-container">
-            <div class="carousel-slide"><img src="./images/carousel.jpg" alt="View 1"></div>
-            <div class="carousel-slide"><img src="./images/carousel.jpg" alt="View 2"></div>
-            <div class="carousel-slide"><img src="./images/carousel.jpg" alt="View 3"></div>
+            <div class="carousel-slide"><img src="<?php echo $storagePath; ?>/images/carousel.jpg" alt="View 1"></div>
+            <div class="carousel-slide"><img src="<?php echo $storagePath; ?>/images/carousel.jpg" alt="View 2"></div>
+            <div class="carousel-slide"><img src="<?php echo $storagePath; ?>/images/carousel.jpg" alt="View 3"></div>
         </div>
         <button class="carousel-button next">&#8250;</button>
     </div>
@@ -28,17 +28,17 @@
     <h2>What You Can Enjoy</h2>
     <div class="activity-grid">
         <div class="activity-card">
-            <img src="./images/activity.jpg" alt="Activity 1">
+            <img src="<?php echo $storagePath; ?>/images/activity.jpg" alt="Activity 1">
             <h3>Nature Trails</h3>
             <p>Hike through our scenic trails and discover hidden ponds, wildflower fields, and gentle streams.</p>
         </div>
         <div class="activity-card">
-            <img src="./images/activity.jpg" alt="Activity 2">
+            <img src="<?php echo $storagePath; ?>/images/activity.jpg" alt="Activity 2">
             <h3>Farm-to-Table Meals</h3>
             <p>Relish fresh produce straight from our gardens. Enjoy healthy, farm-to-table dining experiences.</p>
         </div>
         <div class="activity-card">
-            <img src="./images/activity.jpg" alt="Activity 3">
+            <img src="<?php echo $storagePath; ?>/images/activity.jpg" alt="Activity 3">
             <h3>Outdoor Yoga</h3>
             <p>Relax and unwind with guided yoga sessions in the open air, surrounded by calm and silence.</p>
         </div>
@@ -50,8 +50,8 @@
     <h2>Get in Touch</h2>
     <div class="contact-details">
         <div class="social-links">
-            <a href="https://www.instagram.com/yourinsta" target="_blank">Instagram</a>
-            <a href="https://www.airbnb.com/rooms/yourlisting" target="_blank">Airbnb Listing</a>
+            <a href="<?php echo $ig ?>" target="_blank">Instagram</a>
+            <a href="<?php echo $airbnb ?>" target="_blank">Airbnb Listing</a>
         </div>
     </div>
     <div class="contact-form-wrapper">
