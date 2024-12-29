@@ -32,6 +32,9 @@ class Env{
       ], 
       'view' => [
         'path' => $env['VIEW_PATH']
+      ], 
+      'storage' => [ 
+        'path' => $env['STORAGE_PATH']
       ]
     ];
   }
