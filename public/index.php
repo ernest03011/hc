@@ -10,7 +10,10 @@ use App\Core\Request;
 use App\Core\Container;
 use App\Core\Controllers\HomeController;
 use App\Core\Controllers\TestController;
+use App\Core\Controllers\AboutController;
+use App\Core\Controllers\ActivityController;
 use App\Core\Controllers\ContactController;
+use App\Core\Controllers\GalleryController;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
@@ -22,6 +25,16 @@ $router = new Router($container);
 
 $router
     ->get('/', [HomeController::class, 'index']);
+
+$router
+    ->get('/about', [AboutController::class, 'index']);
+
+$router
+    ->get('/gallery', [GalleryController::class, 'index']);
+
+$router
+    ->get('/activities', [ActivityController::class, 'index']);
+
 $router
     ->get('/contact', [ContactController::class, 'index']);
 
