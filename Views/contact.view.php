@@ -24,16 +24,25 @@
         </div>
     </div>
     <div class="contact-form-wrapper">
-        <form action="/contact" method="POST">
+        <form id="contactForm" action="/contact" method="POST">
             <input type="text" name="name" placeholder="Your Name*" required>
             <input type="email" name="email" placeholder="Your Email*" required>
             <textarea name="message" rows="5" placeholder="Your Message*" required></textarea>
-            <div class="g-recaptcha" data-sitekey="your_site_key"></div>
-            <button type="submit">Send Message</button>
+
+            <input type="hidden" name="submit_frm" value="1">
+            <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
+
+            <button 
+                data-action="submit" 
+                class="g-recaptcha mt-6 bg-yellow-950 text-white p-2 rounded-md"
+                data-sitekey="6LcbNzkpAAAAAPvT5x0b_m25lwwG9tKZfXqt5lbE"
+                id="submitButton"
+            >
+                Send Message
+
+            </button>
         </form>
     </div>
 </div>
-
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <?php include 'partials/footer.php'; ?>
