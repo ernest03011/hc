@@ -7,8 +7,8 @@ namespace App\Core;
 class Request{
 
   public function __construct(
-    private array $get,
-    private array $post,
+    private ?array $get = null,
+    private ?array $post = null,
     private array $server
   ) {
   }
@@ -23,6 +23,16 @@ class Request{
 
   public function server(string $key, $default = null){
     return $this->server[$key] ?? $default;
+  }
+  
+  public function allPost(): array
+  {
+      return $this->post;
+  }
+
+  public function ip(): string
+  {
+      return $this->server['REMOTE_ADDR'] ?? '0.0.0.0';
   }
 
 }
