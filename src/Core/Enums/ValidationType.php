@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Validation;
+namespace App\Core\Enums;
 
-enum validationType : string 
+enum validationType: string 
 {
   case REQUIRED = 'required';
   case EMAIL = 'email';

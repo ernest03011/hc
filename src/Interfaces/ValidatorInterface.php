@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces;
 
-use App\Core\Validation\ValidationType;
-
+use App\Core\Enums\ValidationType;
 
 interface ValidatorInterface{
 

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Core\Validation;
 
 use App\Interfaces\ValidatorInterface;
+use App\Core\Enums\ValidationType;
 
 class Validator implements ValidatorInterface{
 
-  public function validate(mixed $value, ValidationType $type, mixed $options = null ) : bool
+  public function validate(mixed $value, ValidationType $type, mixed $options = null ): bool
   {
 
     return match ($type){
