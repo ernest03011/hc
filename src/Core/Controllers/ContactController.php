@@ -7,21 +7,28 @@ namespace App\Core\Controllers;
 use App\Core\Env;
 use App\Core\View;
 use App\Core\Request;
+use App\Core\Attributes\Get;
+use App\Core\Attributes\Post;
+use App\Core\Attributes\Route;
+use App\Core\Enums\HttpMethod;
 use App\Interfaces\EmailInterface;
 use App\Interfaces\ValidatorInterface;
-use App\Core\Validation\validationType;
+use App\Core\Enums\validationType;
+use App\Core\Validation\CaptchaValidator;
 
 class ContactController{
 
   public function __construct(
     private EmailInterface $mail,
     protected ValidatorInterface $validator,
-    private Env $config
+    private Env $config,
+    private CaptchaValidator $captchaValidator
   ) {
   }
 
+  #[Get('/contact')]
+  #[Route('/contact', HttpMethod::Head)]
   public function index() : View
-
   {
 
     return View::make(
@@ -33,7 +40,25 @@ class ContactController{
     );
   }
 
-  public function sendEmail(Request $request) : View
+  #[Post('/contact')]
+  #[Route('/contact', HttpMethod::Head)]
+  public function handleFormSubmition(Request $request): View
+  {
+   // Check result from the catpcha - Calling captcha validator (dependency)
+   $token = $request->post('g-recaptcha-response');
+   $tokenStatus = $this->captchaValidator->validateToken($token);
+
+   // Send email if score is middle to high - (SendEmail method)
+
+   if($tokenStatus)
+   {
+    return $this->sendEmail($request);
+   }  
+    // Send a message letting the user know there has been an error if the score is low
+        // return a view with this error, maybe the same contact page and the error message. 
+  }
+
+  private function sendEmail(Request $request) : View
   {
 
     $eventMsg = '';
