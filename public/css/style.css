@@ -1,26 +1,32 @@
+/* ================================
+   OPTION 1: EARTHY & WARM THEME
+   ================================ */
+
+/* GENERAL RESET & FONT */
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  color: #333;
+  color: #3C3B37;
+  background: #F7F3EC; /* Soft off-white background */
 }
 
-/* Navigation */
+/* NAVIGATION */
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: #EDE7DC; /* Warm beige */
   position: fixed;
   width: 100%;
   z-index: 999;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 nav .logo {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  color: #2f5d3f;
+  color: #6E5E34; /* Earthy brown */
 }
 
 nav ul {
@@ -31,69 +37,70 @@ nav ul {
 
 nav ul li a {
   text-decoration: none;
-  color: #333;
+  color: #3C3B37;
   font-weight: 400;
   transition: color 0.3s;
 }
 
 nav ul li a:hover {
-  color: #2f5d3f;
+  color: #6E5E34;
 }
 
-/* Hero Section */
+/* HERO SECTION */
 .hero {
   height: 100vh;
   background: url('./images/hero.jpg') center center/cover no-repeat;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   padding: 0 2rem;
-  position: relative;
 }
 
 .hero::after {
   content: "";
   position: absolute;
   top:0; left:0; right:0; bottom:0;
-  background: rgba(0,0,0,0.3);
-  z-index:0;
+  background: rgba(110,94,52,0.35); /* Warm overlay */
+  z-index: 0;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 500px;
+  max-width: 520px;
 }
 
 .hero-content h1 {
   font-size: 3rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .hero-content p {
-  color: #eee;
-  line-height: 1.5;
+  color: #f9f9f9;
+  line-height: 1.6;
   margin-bottom: 2rem;
 }
 
 .hero-content a {
   display: inline-block;
-  background: #2f5d3f;
+  background: #6E5E34;
   color: #fff;
   padding: 0.75rem 1.5rem;
   border-radius: 4px;
   text-decoration: none;
   font-weight: 600;
+  transition: background 0.3s;
 }
 
 .hero-content a:hover {
-  background: #24492f;
+  background: #5A4A2B;
 }
 
-/* Carousel */
+/* CAROUSEL */
 .carousel {
   margin-top: 2rem;
   position: relative;
@@ -119,12 +126,13 @@ nav ul li a:hover {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.85);
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   padding: 0.5rem 1rem;
   border-radius: 50%;
+  z-index: 10;
 }
 
 .carousel-button.prev {
@@ -135,17 +143,17 @@ nav ul li a:hover {
   right: 10px;
 }
 
-/* Activities Section */
+/* ACTIVITIES SECTION */
 .activities {
   padding: 4rem 2rem;
-  background: #f7f7f7;
+  background: #F2ECE3; /* Light beige */
 }
 
 .activities h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 2rem;
-  color: #2f5d3f;
+  color: #6E5E34;
 }
 
 .activity-grid {
@@ -157,7 +165,7 @@ nav ul li a:hover {
 .activity-card {
   background: #fff;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   padding: 2rem;
   text-align: center;
 }
@@ -170,9 +178,9 @@ nav ul li a:hover {
 }
 
 .activity-card h3 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: #333;
+  margin-bottom: 0.75rem;
+  font-size: 1.4rem;
+  color: #3C3B37;
 }
 
 .activity-card p {
@@ -180,17 +188,17 @@ nav ul li a:hover {
   font-size: 0.95rem;
 }
 
-/* Contact Section */
+/* CONTACT SECTION */
 .contact {
   padding: 4rem 2rem;
-  background: #fff;
+  background: #F7F3EC;
 }
 
 .contact h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   margin-bottom: 2rem;
-  color: #2f5d3f;
+  color: #6E5E34;
 }
 
 .contact-details {
@@ -208,8 +216,13 @@ nav ul li a:hover {
 
 .social-links a {
   text-decoration: none;
-  color: #2f5d3f;
+  color: #6E5E34;
   font-weight: 600;
+  transition: color 0.3s;
+}
+
+.social-links a:hover {
+  color: #3C3B37;
 }
 
 .contact-form-wrapper {
@@ -230,34 +243,39 @@ nav ul li a:hover {
   border-radius: 4px;
   border: 1px solid #ccc;
   font-family: inherit;
+  font-size: 1rem;
 }
 
 .contact-form-wrapper button {
-  background: #2f5d3f;
+  background: #6E5E34;
   color: #fff;
   padding: 0.75rem;
   border: none;
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 .contact-form-wrapper button:hover {
-  background: #24492f;
+  background: #5A4A2B;
 }
 
-/* Footer */
+/* FOOTER */
 footer {
   text-align: center;
   padding: 2rem;
-  background: #eee;
+  background: #EDE7DC;
   font-size: 0.9rem;
   color: #444;
 }
 
-/* Responsive */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .hero-content h1 {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
+  }
+  nav {
+      padding: 1rem;
   }
 }
