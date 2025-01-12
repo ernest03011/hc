@@ -35,6 +35,10 @@ class Env{
       ], 
       'storage' => [ 
         'path' => $env['STORAGE_PATH']
+      ], 
+      'captcha' => [
+        'verificationUrl' => $env['CAPTCHA_VERIFICATION_URL'], 
+        'secretKey' => $env['CAPTCHA_SECRET_KEY']
       ]
     ];
   }
