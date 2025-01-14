@@ -25,6 +25,5 @@ document.addEventListener("DOMContentLoaded", function () {
   submitButton.addEventListener("click", (event) => {
     event.preventDefault();
     manageCaptcha.initCaptcha();
-    console.log("we");
   });
 });
