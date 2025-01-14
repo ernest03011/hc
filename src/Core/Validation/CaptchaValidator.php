@@ -5,65 +5,56 @@ declare(strict_types=1);
 namespace App\Core\Validation;
 
 use App\Core\APIService;
-use App\Core\Env;
-use App\Core\Request;
+use App\Core\Enums\CaptchaValidationType;
 
 class CaptchaValidator{
 
   private string $errorMsg;
 
   public function __construct(
-    private Env $config,
-    protected Request $request,
     private APIService $api
   ) 
   { 
   }
 
-  public function validateToken(string $token) : bool
+  public function validateToken(
+    string $captchaToken, 
+    array $requestData, 
+    string $verificationUrl, 
+    float $threshold = 0.5) : bool
   {
-    if(empty($token))
+    if(empty($captchaToken))
     {
-      $this->errorMsg = "No token provided";
+      $this->errorMsg = CaptchaValidationType::MISSING_TOKEN;
       return false;
     }
-
-    $captchaResp = $this->request->post('g-recaptcha-response');
-    $secretKey = $this->config->captcha['secretKey'];
-    $verificationUrl = $this->config->captcha['verificationUrl'];
-
-    $resqData = array(
-        'secret' => $secretKey,
-        'response' => $captchaResp,
-        'remote_ip' => $this->request->ip(),
-    );
-
-    $response = $this->api->execute($verificationUrl, $resqData);
-    $response_data = [];
-
-    if ($response == false) {
-
-      $this->errorMsg = 'Ups! There was an error, try again!';
-      return false;
-      
+    
+    $response = $this->api->execute($verificationUrl, $requestData);
+    $responseData = [];
+    
+    if (empty($response)) {
+      $this->errorMsg = CaptchaValidationType::UNABLE_TO_EXECUTE_CAPTCHA_VALIDATION_REQUEST;
+      return false;    
     }
 
-    $response_data = json_decode($response, true);
-    if($response_data["success"] == false){
-      
-      $this->errorMsg = "Something went wrong. Refresh/reload the page and try after 2 minutes!";
-      return false;
-    }else{
-        
-        return true;
+    $responseData = json_decode($response, true);
+
+    if($responseData["success"] === false){
+      $this->errorMsg = CaptchaValidationType::UNABLE_TO_EXECUTE_CAPTCHA_VALIDATION_REQUEST;
+      return false;    
     }
 
-    $this->errorMsg = "default";
-    return false;
+    $score = (float) ($responseData['score'] ?? 0);
+    if($score < $threshold){
+      $this->errorMsg = CaptchaValidationType::LOW_SCORE;
+      return false;  
+    }
+
+    return true;
 
   }
 
-  private function getErrorMsg() : string
+  public function getErrorMsg() : string
   {
     return $this->errorMsg ?? "";
   }
