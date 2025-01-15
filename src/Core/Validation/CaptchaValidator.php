@@ -25,7 +25,7 @@ class CaptchaValidator{
   {
     if(empty($captchaToken))
     {
-      $this->errorMsg = CaptchaValidationType::MISSING_TOKEN;
+      $this->errorMsg = CaptchaValidationType::MISSING_TOKEN->value;
       return false;
     }
     
@@ -33,25 +33,24 @@ class CaptchaValidator{
     $responseData = [];
     
     if (empty($response)) {
-      $this->errorMsg = CaptchaValidationType::UNABLE_TO_EXECUTE_CAPTCHA_VALIDATION_REQUEST;
+      $this->errorMsg = CaptchaValidationType::UNABLE_TO_EXECUTE_CAPTCHA_VALIDATION_REQUEST->value;
       return false;    
     }
 
     $responseData = json_decode($response, true);
 
     if($responseData["success"] === false){
-      $this->errorMsg = CaptchaValidationType::UNABLE_TO_EXECUTE_CAPTCHA_VALIDATION_REQUEST;
+      $this->errorMsg = CaptchaValidationType::UNABLE_TO_EXECUTE_CAPTCHA_VALIDATION_REQUEST->value;
       return false;    
     }
 
     $score = (float) ($responseData['score'] ?? 0);
     if($score < $threshold){
-      $this->errorMsg = CaptchaValidationType::LOW_SCORE;
+      $this->errorMsg = CaptchaValidationType::LOW_SCORE->value;
       return false;  
     }
 
     return true;
-
   }
 
   public function getErrorMsg() : string
