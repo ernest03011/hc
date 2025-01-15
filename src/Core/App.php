@@ -23,14 +23,6 @@ class App{
     protected Router $router
   
   ) {
-
-    // $this->container->set(EmailInterface::class, ContactForm::class);
-    // $this->container->set(ValidatorInterface::class, Validator::class);
-
-    // View::setViewPath(
-    //   $config->view['path'] ?? __DIR__ . '/../views'
-    // );
-
   }
 
   public function boot(): static
