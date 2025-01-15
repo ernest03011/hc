@@ -73,32 +73,30 @@ class ContactController{
   private function sendEmail(Request $request) : View
   {
 
-    $eventMsg = '';
+    $emailStatus = '';
 
     $data = [
       'name' => $request->post('name'),
       'email' => $request->post('email'),
       'message' => $request->post('message')
     ];
-
     $isValid = $this->validate($data);
-
     if (! $isValid)
     {
       return View::make('error/422');
     }
 
-    $status = $this->mail->send($data);
+    $isEmailSent = $this->mail->send($data);
 
-    $eventMsg = 
-      $status 
+    $emailStatus = 
+      $isEmailSent 
         ? 'Email has been sent' 
         : "Someting went wrong, send the email again";
 
     return View::make(
       'contact.view',
       [
-        'message' => $eventMsg
+        'message' => $emailStatus
       ]
     );
   }
