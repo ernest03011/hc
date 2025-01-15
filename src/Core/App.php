@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Core;
 
 use Dotenv\Dotenv;
-use App\Core\ContactForm;
+use App\Core\Mailer;
 use App\Core\Validation\Validator;
 use App\Interfaces\EmailInterface;
 use App\Interfaces\ValidatorInterface;
@@ -32,7 +32,7 @@ class App{
     $dotEnv->load();
 
     
-    $this->container->set(EmailInterface::class, ContactForm::class);
+    $this->container->set(EmailInterface::class, Mailer::class);
     $this->container->set(ValidatorInterface::class, Validator::class);
     $this->container->set(Env::class, function () {
       return new Env($_ENV);

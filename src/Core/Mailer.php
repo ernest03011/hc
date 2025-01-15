@@ -9,7 +9,7 @@ use App\Interfaces\EmailInterface;
 use PHPMailer\PHPMailer\PHPMailer;
 use App\Factories\PHPMailerFactory;
 
-class ContactForm implements EmailInterface{
+class Mailer implements EmailInterface{
 
   private PHPMailer $mailer;
 
