@@ -12,52 +12,71 @@ use App\Factories\PHPMailerFactory;
 class Mailer implements EmailInterface{
 
   private PHPMailer $mailer;
+  private array $smtpConfig;
 
   public function __construct(
     private PHPMailerFactory $mailerFactory,
     private Env $config
   ) {
     $this->mailer = $this->mailerFactory->createPHPMailer();
+
+    $this->smtpConfig = $this->config->smtp ?? [];
+
+    $this->configureMailer();
   }
 
   public function send(array $data) : bool
   {
-    $smtp = $this->config->smtp;
+
     try {
+    
+      $this->mailer->clearAddresses();
+      $this->mailer->clearReplyTos();
 
-      $this->mailer->isSMTP();
-      $this->mailer->SMTPDebug = $smtp['debug'];
-      $this->mailer->Host = $smtp['host'];
-      $this->mailer->Port = $smtp['port'];
-      $this->mailer->SMTPSecure = $smtp['encryption'];
-      $this->mailer->SMTPAuth = $smtp['auth'];
-      $this->mailer->Username = $smtp['username'];
-      $this->mailer->Password = $smtp['password'];
-      $this->mailer
-              ->setFrom(
-                $smtp['setFrom'], 
-                $smtp['name'] ?? ""
-              );     
-      $this->mailer
-              ->addReplyTo(
-                $data["email"] ?? "", 
-                $this->data['name'] ?? ""
-              );
-      $this->mailer
-              ->addAddress($smtp['ReceiverAddress'], 
-                $this->data['name'] ?? ""
-              );
-      $this->mailer->Subject = 'Countless moments in Paradise.';
-      $this->mailer->Body = $data['message'];
+      $this->mailer->addReplyTo(
+        $data["email"] ?? "", 
+        $this->data['name'] ?? ""
+      );
+      $this->mailer->addAddress(
+        $this->smtpConfig['ReceiverAddress'], 
+        $this->data['name'] ?? ""
+      );
 
-      $this->mailer->send();
+      $this->mailer->Subject = $data['subject'] ?? '';
+      $this->mailer->Body = $data['message'] ?? '';
+
+      if(!$this->mailer->send())
+      {
+        throw new EmailException("Error Processing Request");   
+      }
 
       return true;
 
-    } catch (EmailException $e) {
+    } catch (EmailException | \Throwable $e) {
       return false;
     }
 
+
+  }
+
+  private function configureMailer(): void
+  {
+
+    $this->mailer->isSMTP();
+    
+    $this->mailer->SMTPDebug = $this->smtpConfig['debug']       ?? 0;
+    $this->mailer->Host = $this->smtpConfig['host']             ?? '';
+    $this->mailer->Port = $this->smtpConfig['port']             ?? 587;
+    $this->mailer->SMTPSecure = $this->smtpConfig['encryption'] ?? PHPMailer::ENCRYPTION_STARTTLS;
+    $this->mailer->SMTPAuth = $this->smtpConfig['auth']         ?? true;
+    $this->mailer->Username = $this->smtpConfig['username']     ?? '';
+    $this->mailer->Password = $this->smtpConfig['password']     ?? '';
+
+
+    $this->mailer->setFrom(
+      $this->smtpConfig['setFrom'] ?? 'no-reply@example.com', 
+      $this->smtpConfig['name'] ?? "No reply"
+    );     
 
   }
 }
