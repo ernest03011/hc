@@ -27,6 +27,7 @@
         <form id="contactForm" action="/contact" method="POST">
             <input type="text" name="name" placeholder="Your Name*" required>
             <input type="email" name="email" placeholder="Your Email*" required>
+            <input type="hidden" value="Countless moments in Paradise." name="subject" id="subject">
             <textarea name="message" rows="5" placeholder="Your Message*" required></textarea>
 
             <input type="hidden" name="submit_frm" value="1">
