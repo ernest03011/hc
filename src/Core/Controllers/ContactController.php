@@ -13,7 +13,7 @@ use App\Core\Attributes\Route;
 use App\Core\Enums\HttpMethod;
 use App\Interfaces\EmailInterface;
 use App\Interfaces\ValidatorInterface;
-use App\Core\Enums\validationType;
+use App\Core\Enums\ValidationType;
 use App\Core\Validation\CaptchaValidator;
 
 class ContactController{
@@ -56,6 +56,13 @@ class ContactController{
    }  
     // Send a message letting the user know there has been an error if the score is low
         // return a view with this error, maybe the same contact page and the error message. 
+    
+    return View::make(
+      'contact.view',
+      [
+        'message' => "Invalid token"
+      ]
+    );
   }
 
   private function sendEmail(Request $request) : View
