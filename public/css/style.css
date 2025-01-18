@@ -279,3 +279,29 @@ footer {
       padding: 1rem;
   }
 }
+
+/* Base styling for any notification message */
+.notification {
+  padding: 1rem;
+  margin: 4rem auto;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+  font-family: 'Poppins', sans-serif; /* or your preferred font */
+}
+
+/* Error styling (e.g., message was not sent) */
+.notification.error {
+  background-color: #f8d7da; /* Light red/pink background */
+  color: #721c24;            /* Dark red text */
+  border: 1px solid #f5c6cb; /* Matching border */
+}
+
+/* Success styling (e.g., message was sent) */
+.notification.success {
+  background-color: #d4edda; /* Light green background */
+  color: #155724;            /* Dark green text */
+  border: 1px solid #c3e6cb; /* Matching border */
+}
