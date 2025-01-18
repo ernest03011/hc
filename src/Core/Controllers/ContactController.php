@@ -35,8 +35,8 @@ class ContactController{
     return View::make(
       'contact.view', 
       [
-        'ig' => $this->config->social['ig'],
-        'airbnb' => $this->config->social['airbnb']
+        'ig' => $this->config->social['ig'] ?? "#",
+        'airbnb' => $this->config->social['airbnb'] ?? "#"
       ]
     );
   }
