@@ -5,13 +5,21 @@
     <h1>Contact Us</h1>
 </section>
 
-<?php if(! empty($message)) : ?>
+<?php
+    if(!empty($messageType))
+    {
+        $notificationClass = $messageType === 'success' ? 'notification success' : 'notification error';
+    }
+?>
 
+<?php if (!empty($message)) : ?>
   <section>
-    <h3>This is the the <?= $message ?></h1>
+    <p class="<?= $notificationClass; ?>">
+      <?= htmlspecialchars($message) ?>
+    </p>
   </section>
-
 <?php endif; ?>
+
 
 
 <div class="container">
