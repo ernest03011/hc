@@ -5,13 +5,21 @@
     <h1>Contact Us</h1>
 </section>
 
-<?php if(! empty($message)) : ?>
+<?php
+    if(!empty($messageType))
+    {
+        $notificationClass = $messageType === 'success' ? 'notification success' : 'notification error';
+    }
+?>
 
+<?php if (!empty($message)) : ?>
   <section>
-    <h3>This is the the <?= $message ?></h1>
+    <p class="<?= $notificationClass; ?>">
+      <?= htmlspecialchars($message) ?>
+    </p>
   </section>
-
 <?php endif; ?>
+
 
 
 <div class="container">
@@ -27,6 +35,7 @@
         <form id="contactForm" action="/contact" method="POST">
             <input type="text" name="name" placeholder="Your Name*" required>
             <input type="email" name="email" placeholder="Your Email*" required>
+            <input type="hidden" value="Countless moments in Paradise." name="subject" id="subject">
             <textarea name="message" rows="5" placeholder="Your Message*" required></textarea>
 
             <input type="hidden" name="submit_frm" value="1">

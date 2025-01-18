@@ -11,9 +11,10 @@ use App\Core\Attributes\Get;
 use App\Core\Attributes\Post;
 use App\Core\Attributes\Route;
 use App\Core\Enums\HttpMethod;
+use App\Core\Enums\ValidationType;
+use App\Exceptions\EmailException;
 use App\Interfaces\EmailInterface;
 use App\Interfaces\ValidatorInterface;
-use App\Core\Enums\validationType;
 use App\Core\Validation\CaptchaValidator;
 
 class ContactController{
@@ -44,49 +45,64 @@ class ContactController{
   #[Route('/contact', HttpMethod::Head)]
   public function handleFormSubmition(Request $request): View
   {
-   // Check result from the catpcha - Calling captcha validator (dependency)
-   $token = $request->post('g-recaptcha-response');
-   $tokenStatus = $this->captchaValidator->validateToken($token);
+ 
+    $captchaResponse = $request->post('g-recaptcha-response');
+    $secretKey = $this->config->captcha['secretKey'];
+    $verificationUrl = $this->config->captcha['verificationUrl'];
+    
+    $requestData = array(
+      'secret' => $secretKey,
+      'response' => $captchaResponse,
+      'remote_ip' => $request->ip(),
+    );
 
-   // Send email if score is middle to high - (SendEmail method)
+    $tokenStatus = $this->captchaValidator->validateToken($captchaResponse, $requestData, $verificationUrl);
 
-   if($tokenStatus)
-   {
-    return $this->sendEmail($request);
-   }  
-    // Send a message letting the user know there has been an error if the score is low
-        // return a view with this error, maybe the same contact page and the error message. 
+    if($tokenStatus)
+    {
+      return $this->sendEmail($request);
+    }  
+
+    return View::make(
+      'contact.view',
+        [
+          'message' => $this->captchaValidator->getErrorMsg()
+        ]
+    );
   }
 
   private function sendEmail(Request $request) : View
   {
-
-    $eventMsg = '';
 
     $data = [
       'name' => $request->post('name'),
       'email' => $request->post('email'),
       'message' => $request->post('message')
     ];
-
     $isValid = $this->validate($data);
-
     if (! $isValid)
     {
       return View::make('error/422');
     }
 
-    $status = $this->mail->send($data);
+    try {
+      $this->mail->send($data);
+    } catch (EmailException) {
 
-    $eventMsg = 
-      $status 
-        ? 'Email has been sent' 
-        : "Someting went wrong, send the email again";
+      return View::make(
+        'contact.view',
+        [
+          'message' => "Somethin went wrong, try again", 
+          'messageType' => "error"
+        ]
+      );
+    }
 
     return View::make(
       'contact.view',
       [
-        'message' => $eventMsg
+        'message' => "Email has been sent!",
+        'messageType' => "success"
       ]
     );
   }
