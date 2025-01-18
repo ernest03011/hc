@@ -12,9 +12,10 @@ use App\Core\Attributes\Post;
 use App\Core\Attributes\Route;
 use App\Core\Enums\HttpMethod;
 use App\Core\Enums\ValidationType;
-use App\Core\Validation\CaptchaValidator;
+use App\Exceptions\EmailException;
 use App\Interfaces\EmailInterface;
 use App\Interfaces\ValidatorInterface;
+use App\Core\Validation\CaptchaValidator;
 
 class ContactController{
 
@@ -73,8 +74,6 @@ class ContactController{
   private function sendEmail(Request $request) : View
   {
 
-    $emailStatus = '';
-
     $data = [
       'name' => $request->post('name'),
       'email' => $request->post('email'),
@@ -86,17 +85,24 @@ class ContactController{
       return View::make('error/422');
     }
 
-    $isEmailSent = $this->mail->send($data);
+    try {
+      $this->mail->send($data);
+    } catch (EmailException) {
 
-    $emailStatus = 
-      $isEmailSent 
-        ? 'Email has been sent' 
-        : "Someting went wrong, send the email again";
+      return View::make(
+        'contact.view',
+        [
+          'message' => "Somethin went wrong, try again", 
+          'messageType' => "error"
+        ]
+      );
+    }
 
     return View::make(
       'contact.view',
       [
-        'message' => $emailStatus
+        'message' => "Email has been sent!",
+        'messageType' => "success"
       ]
     );
   }
