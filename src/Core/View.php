@@ -35,7 +35,7 @@ class View{
     return new Static($view, $params);
   }
 
-  public function render() : string
+  private function render() : string
   {
     $viewPath = self::$viewPath . '/' . $this->view . '.php';
 
