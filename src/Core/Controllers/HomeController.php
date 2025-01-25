@@ -26,7 +26,8 @@ class HomeController{
       [
         'storagePath' => $this->config->storage['path'],
         'ig' => $this->config->social['ig'] ?? "#",
-        'airbnb' => $this->config->social['airbnb'] ?? "#"
+        'airbnb' => $this->config->social['airbnb'] ?? "#",
+        'whatsapp' => $this->config->social['whatsapp'] ?? "#"
       ]
     );
   }
