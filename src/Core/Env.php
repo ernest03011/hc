@@ -28,7 +28,10 @@ class Env{
 
       'social' => [
         'ig' => $env['SOCIAL_IG_URL'],
-        'airbnb' => $env['SOCIAL_AIRBNB_URL']
+        'airbnb' => $env['SOCIAL_AIRBNB_URL'],
+        'whatsapp' => $env['SOCIAL_WHATSAPP_URL'],
+        'youtube' => $env['SOCIAL_YOUTUBE_URL'],
+        'vimeo' => $env['SOCIAL_VIMEO_URL']
       ], 
       'view' => [
         'path' => $env['VIEW_PATH']
