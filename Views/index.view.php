@@ -2,7 +2,10 @@
 <?php require('partials/nav.php') ?>
 
 <!-- Hero Section -->
-<section class="relative bg-cover bg-center h-screen" style="background-image: url('./storage/images/hero.jpg');">
+<section 
+    class="relative bg-cover bg-center h-screen" 
+    style="background-image: url('<?php echo $storagePath; ?>/images/hero.jpg');"
+>
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     <div class="relative container mx-auto h-full flex flex-col justify-center items-center text-center text-white">
         <h1 class="text-5xl md:text-6xl font-bold drop-shadow-lg">
@@ -55,7 +58,7 @@
                 </div>
                 <h3 class="text-2xl font-semibold">WhatsApp</h3>
                 <p class="mt-2 text-gray-600">Chat with us directly on WhatsApp.</p>
-                <a href="https://wa.me/1234567890" class="text-green-500 font-semibold mt-4 inline-block">Start Chat</a>
+                <a href="<?= $whatsapp ?>" target="_blank" class="text-green-500 font-semibold mt-4 inline-block">Start Chat</a>
             </div>
 
             <!-- Instagram -->
@@ -65,7 +68,7 @@
                 </div>
                 <h3 class="text-2xl font-semibold">Instagram</h3>
                 <p class="mt-2 text-gray-600">Follow us on Instagram for updates and photos.</p>
-                <a href="https://www.instagram.com/yourusername" class="text-pink-500 font-semibold mt-4 inline-block">Visit Instagram</a>
+                <a href="<?= $ig ?>" target="_blank" class="text-pink-500 font-semibold mt-4 inline-block">Visit Instagram</a>
             </div>
 
             <!-- Airbnb -->
@@ -75,7 +78,7 @@
                 </div>
                 <h3 class="text-2xl font-semibold">Airbnb</h3>
                 <p class="mt-2 text-gray-600">Book your stay with us on Airbnb.</p>
-                <a href="https://www.airbnb.com/p/yourlisting" class="text-red-500 font-semibold mt-4 inline-block">View Listing</a>
+                <a href="<?= $airbnb ?>" target="_blank" class="text-red-500 font-semibold mt-4 inline-block">View Listing</a>
             </div>
 
             <!-- Email/Write -->
