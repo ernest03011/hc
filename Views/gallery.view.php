@@ -41,7 +41,7 @@
                     </div>
                     <h3 class="text-xl font-semibold mb-2">YouTube Channel</h3>
                     <p class="text-gray-600 mb-4">Check out our latest videos on YouTube for a closer look at our retreat.</p>
-                    <a href="https://www.youtube.com/yourchannel" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-red-600 transition">
+                    <a href="<?= $youtube ?>" target="_blank" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-red-600 transition">
                         Visit YouTube
                     </a>
                 </div>
@@ -53,7 +53,7 @@
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Instagram Reels</h3>
                     <p class="text-gray-600 mb-4">Follow our Instagram page for reels and sneak peeks of our countryside bliss.</p>
-                    <a href="https://www.instagram.com/yourusername" class="bg-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-pink-600 transition">
+                    <a href="<?= $ig ?>" target="_blank" class="bg-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-pink-600 transition">
                         Visit Instagram
                     </a>
                 </div>
@@ -66,7 +66,7 @@
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Vimeo Showcase</h3>
                     <p class="text-gray-600 mb-4">Browse our curated videos and stories on Vimeo.</p>
-                    <a href="https://vimeo.com/yourprofile" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-blue-600 transition">
+                    <a href="<?= $vimeo ?>" target="_blank" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-md hover:bg-blue-600 transition">
                         Visit Vimeo
                     </a>
                 </div>
