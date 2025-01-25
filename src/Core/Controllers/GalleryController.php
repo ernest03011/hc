@@ -24,7 +24,10 @@ class GalleryController{
     return View::make(
       'gallery.view', 
       [
-        'storagePath' => $this->config->storage['path']
+        'storagePath' => $this->config->storage['path'],
+        'ig' => $this->config->social['ig'] ?? "#",
+        'youtube' => $this->config->social['youtube'] ?? "#",
+        'vimeo' => $this->config->social['vimeo'] ?? "#"
       ]
     );
   }
