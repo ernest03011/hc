@@ -10,9 +10,9 @@ use App\Core\Enums\HttpMethod;
 #[Attribute(Attribute::TARGET_METHOD | Attribute::IS_REPEATABLE)]
 class Post extends Route
 {
-  public function __construct(public string $routePath)
-  {
-    parent::__construct($routePath, HttpMethod::Post);
-  }
+    public function __construct(public string $routePath)
+    {
+        parent::__construct($routePath, HttpMethod::Post);
+    }
   
 }

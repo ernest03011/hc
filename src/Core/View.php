@@ -7,62 +7,60 @@ namespace App\Core;
 use App\Exceptions\ViewNotFoundException;
 use App\Exceptions\ViewPathNotFoundException;
 
-class View{
+class View
+{
 
-  private static string $viewPath = '';
+    private static string $viewPath = '';
 
-  public function __construct(
-
-    protected string $view,
-    protected array $params = []
-
-  ) 
-  {
-  }
-
-  public static function setViewPath(string $viewPath) : void
-  {
-    self::$viewPath = $viewPath;
-  }
-
-  public static function make(string $view, array $params = []) : static
-  {
-
-    if(self::$viewPath === ''){
-      throw new ViewPathNotFoundException();
+    public function __construct(
+        protected string $view,
+        protected array $params = []
+    ) { 
     }
 
-    return new Static($view, $params);
-  }
-
-  private function render() : string
-  {
-    $viewPath = self::$viewPath . '/' . $this->view . '.php';
-
-    if(! file_exists($viewPath)){
-      throw new ViewNotFoundException();
+    public static function setViewPath(string $viewPath) : void
+    {
+        self::$viewPath = $viewPath;
     }
 
-    foreach ($this->params as $key => $value) {
-      $$key = $value;
+    public static function make(string $view, array $params = []) : static
+    {
+
+        if(self::$viewPath === '') {
+            throw new ViewPathNotFoundException();
+        }
+
+        return new Static($view, $params);
     }
 
-    ob_start();
+    private function render() : string
+    {
+        $viewPath = self::$viewPath . '/' . $this->view . '.php';
 
-    include $viewPath;
+        if(! file_exists($viewPath)) {
+            throw new ViewNotFoundException();
+        }
+
+        foreach ($this->params as $key => $value) {
+            $$key = $value;
+        }
+
+        ob_start();
+
+        include $viewPath;
     
-    return (string) ob_get_clean();
+        return (string) ob_get_clean();
 
-  }
+    }
 
-  public function __toString() : string
-  {
-    return $this->render();
-  }
+    public function __toString() : string
+    {
+        return $this->render();
+    }
 
-  public function __get(string $name)
-  {
-    return $this->params[$name] ?? null; 
-  }
+    public function __get(string $name)
+    {
+        return $this->params[$name] ?? null; 
+    }
 
 }

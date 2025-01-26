@@ -6,8 +6,7 @@ namespace App\Interfaces;
 
 use App\Core\Enums\ValidationType;
 
-interface ValidatorInterface{
-
-  public function validate(mixed $value, ValidationType $type, mixed $options = null ) : bool;
-
+interface ValidatorInterface
+{
+    public function validate(mixed $value, ValidationType $type, mixed $options = null ) : bool;
 }

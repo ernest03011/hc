@@ -9,7 +9,7 @@ use App\Core\Enums\HttpMethod;
 use App\Interfaces\RouteInterface;
 
 #[Attribute(Attribute::TARGET_METHOD|Attribute::IS_REPEATABLE)]
-class Route 
+class Route
 {
     public function __construct(public string $routePath, public HttpMethod $method = HttpMethod::Get)
     {

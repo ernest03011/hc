@@ -6,11 +6,12 @@ namespace App\Factories;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-class PHPMailerFactory{
+class PHPMailerFactory
+{
 
-  public function createPHPMailer() : PHPMailer
-  {
-    $mailer = new PHPMailer(true);
-    return $mailer;
-  }
+    public function createPHPMailer() : PHPMailer
+    {
+        $mailer = new PHPMailer(true);
+        return $mailer;
+    }
 }
