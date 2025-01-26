@@ -10,8 +10,9 @@ use Attribute;
 class Get extends Route
 {
 
-  public function __construct(string $routePath) {
-    parent::__construct($routePath);
-  }
+    public function __construct(string $routePath)
+    {
+        parent::__construct($routePath);
+    }
 
 }

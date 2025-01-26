@@ -31,8 +31,6 @@ $router->registerRoutesFromControllerAttributes(
 );
 
 (new App(
-
     $container,
     $router
-
 ))->boot()->run();

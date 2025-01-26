@@ -13,12 +13,10 @@ class Container implements ContainerInterface
 
     public function get(string $id)
     {
-        if($this->has($id))
-        {
+        if($this->has($id)) {
             $entry = $this->entries[$id];
 
-            if(is_callable($entry))
-            {
+            if(is_callable($entry)) {
                 return $entry($this);
             }
 
@@ -45,8 +43,7 @@ class Container implements ContainerInterface
 
         $reflectionClasss = new \ReflectionClass($id);
 
-        if(! $reflectionClasss->isInstantiable())
-        {
+        if(! $reflectionClasss->isInstantiable()) {
             throw new ContainerException('Class "' . $id . '" is not instantiable');
         }
 
@@ -54,8 +51,7 @@ class Container implements ContainerInterface
 
         $constructor = $reflectionClasss->getConstructor();
 
-        if(! $constructor)
-        {
+        if(! $constructor) {
             return new $id;
         }
 
@@ -64,34 +60,30 @@ class Container implements ContainerInterface
 
         $parameters = $constructor->getParameters();
 
-        if(! $parameters)
-        {
+        if(! $parameters) {
             return new $id;
         }  
 
         // 4. If the constructor parameters is a class then try to resolve the class using the container. 
 
         $dependencies = array_map(
-            function(\ReflectionParameter $param) use ($id){
+            function (\ReflectionParameter $param) use ($id) {
                 $name = $param->getName();
                 $type = $param->getType();
 
-                if (! $type)
-                {
+                if (! $type) {
                     throw new ContainerException(
                         'Failed to resolve class "' . $id . '" because param "' . $name . '" is missing a type hint'
                     );
                 }
 
-                if ($type instanceof \ReflectionUnionType)
-                {
+                if ($type instanceof \ReflectionUnionType) {
                     throw new ContainerException(
                         'Failed to resolve class "' . $id . '" because of union type for param "' . $name . '"'
                     );
                 }
 
-                if ($type instanceof \ReflectionNamedType && ! $type->isBuiltin())
-                {
+                if ($type instanceof \ReflectionNamedType && ! $type->isBuiltin()) {
 
                     return $this->get($type->getName());
                 }

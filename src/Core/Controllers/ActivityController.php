@@ -10,23 +10,24 @@ use App\Core\Attributes\Get;
 use App\Core\Attributes\Route;
 use App\Core\Enums\HttpMethod;
 
-class ActivityController{
+class ActivityController
+{
 
-  public function __construct(
-    private Env $config
-  ) {
-  }
+    public function __construct(
+        private Env $config
+    ) {
+    }
 
-  #[Get('/activities')]
-  #[Route('/activities', HttpMethod::Head)]
-  public function index() : View
-  {
-    return View::make(
-      'activity.view', 
-      [
-        'storagePath' => $this->config->storage['path']
-      ]
-    );
-  }
+    #[Get('/activities')]
+    #[Route('/activities', HttpMethod::Head)]
+    public function index() : View
+    {
+        return View::make(
+            'activity.view', 
+            [
+              'storagePath' => $this->config->storage['path']
+            ]
+        );
+    }
 
 }

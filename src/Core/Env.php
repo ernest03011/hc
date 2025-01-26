@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Core;
 
-class Env{
+class Env
+{
 
-  protected array $config = [];
+    protected array $config = [];
 
-  public function __construct(array $env)
-  {
-    $this->config = [
-      'smtp' => [
+    public function __construct(array $env)
+    {
+        $this->config = [
+        'smtp' => [
         'name' => $env['SMTP_NAME'],
         'debug' => $env['SMTP_DEBUG'],
         'host' => $env['SMTP_HOST'],
@@ -24,28 +25,31 @@ class Env{
         'addReplyTo' => $env['SMTP_ADD_REPLY_TO'],
         'ReceiverAddress' => $env['SMTP_RECEIVER_ADDRESS'],
         
-      ],
+        ],
 
-      'social' => [
+        'social' => [
         'ig' => $env['SOCIAL_IG_URL'],
-        'airbnb' => $env['SOCIAL_AIRBNB_URL']
-      ], 
-      'view' => [
+        'airbnb' => $env['SOCIAL_AIRBNB_URL'],
+        'whatsapp' => $env['SOCIAL_WHATSAPP_URL'],
+        'youtube' => $env['SOCIAL_YOUTUBE_URL'],
+        'vimeo' => $env['SOCIAL_VIMEO_URL']
+        ], 
+        'view' => [
         'path' => $env['VIEW_PATH']
-      ], 
-      'storage' => [ 
+        ], 
+        'storage' => [ 
         'path' => $env['STORAGE_PATH']
-      ], 
-      'captcha' => [
+        ], 
+        'captcha' => [
         'verificationUrl' => $env['CAPTCHA_VERIFICATION_URL'], 
         'secretKey' => $env['CAPTCHA_SECRET_KEY']
-      ]
-    ];
-  }
+        ]
+        ];
+    }
 
-  public function __get(string $name) : array | null
-  {
-    return $this->config[$name] ?? null;
-  }
+    public function __get(string $name) : array | null
+    {
+        return $this->config[$name] ?? null;
+    }
   
 }

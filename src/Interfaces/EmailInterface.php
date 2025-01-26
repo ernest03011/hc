@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Interfaces;
 
-interface EmailInterface{
+interface EmailInterface
+{
 
-  public function send(array $data) : bool;
+    public function send(array $data) : bool;
 
 }
+

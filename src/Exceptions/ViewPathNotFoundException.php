@@ -6,5 +6,5 @@ namespace App\Exceptions;
 
 class ViewPathNotFoundException extends \Exception
 {
-  protected $message = 'View Path not set';
+    protected $message = 'View Path not set';
 }
