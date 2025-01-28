@@ -77,7 +77,8 @@ class ContactController
         $data = [
             'name' => $request->post('name'),
             'email' => $request->post('email'),
-            'message' => $request->post('message')
+            'message' => $request->post('message'),
+            'subject' => $request->post('subject'),
         ];
         $isValid = $this->validate($data);
         if (! $isValid) {

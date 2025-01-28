@@ -59,6 +59,7 @@ if (!empty($messageType)) {
 
                 <input type="hidden" name="submit_frm" value="1">
                 <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
+                <input type="hidden" id="subject" name="subject" value="Countryside Stay"/>
 
                 <button 
                     class="mt-4 bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 font-semibold shadow-lg transition"
