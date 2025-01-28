@@ -47,7 +47,7 @@ class ContactController
     public function handleFormSubmition(Request $request): View
     {
  
-        $captchaResponse = $request->post('g-recaptcha-response');
+        $captchaResponse = $request->post('recaptchaToken');
         $secretKey = $this->config->captcha['secretKey'];
         $verificationUrl = $this->config->captcha['verificationUrl'];
     
