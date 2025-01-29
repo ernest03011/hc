@@ -11,7 +11,7 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LcbNzkpAAAAAPvT5x0b_m25lwwG9tKZfXqt5lbE"></script>
 </head>
 
-<body class="flex flex-col min-h-screen bg-gray-50">
+<body class="flex flex-col min-h-screen bg-gray-50 w-full max-w-full container mx-auto">
 
     <!-- Main Content -->
     <main class="flex-grow">
