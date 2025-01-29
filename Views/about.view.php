@@ -2,7 +2,7 @@
 <?php require 'partials/nav.php'; ?>
 
 <section class="py-16 bg-gray-100">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-5">
         <h1 class="text-4xl font-bold text-green-600 mb-6">About Us</h1>
         <p class="text-gray-700 text-lg leading-relaxed">
             Welcome to our countryside Airbnb, a tranquil retreat where nature and comfort come together to create an unforgettable experience. Nestled in the heart of the countryside, our property offers a serene escape from the hustle and bustle of daily life. Whether you're looking for a romantic getaway, a family vacation, or a peaceful retreat, we have something for everyone.
